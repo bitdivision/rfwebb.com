@@ -1,0 +1,88 @@
+I"[<p>I’ve wanted a digital piano for some time now, and I still occasionally glance
+over the ‘spares and repairs’ category on eBay in hopes of a cheap deal.
+Finally, I found one:</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/keyboard.jpg"><img src="http://localhost:4000/images/keyboard/keyboard.jpg" alt="picture of the keyboard" /></a></p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>According to the previous owner, when she bought the piano, it was working
+fine. Over time it developed a crackle and eventually stopped producing any
+audio output whatsoever. It does however turn on and the digital stuff appears
+fine, the screen and buttons were all working.</p>
+
+<p>Opening up the keyboard, I found a problem pretty quickly. Leaky capacitors:</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/leaky.JPG"><img src="http://localhost:4000/images/keyboard/leaky.JPG" alt="leaky capacitors" /></a></p>
+
+<h2 id="capacitors">Capacitors</h2>
+<p>Electrolytic capacitors are composed of a thin sheet of (usually) aluminium bathed in
+electrolyte. At the factory a dielectric oxide layer is formed on the aluminium
+by applying a voltage to it and thus creating a capacitor.</p>
+
+<p>Over time the electrolyte in these capacitors dries out, usually causing the
+capacitance to decrease and the impedance to increase. In some cases, gas build
+up inside the capacitor and then bursts, leaking electrolyte onto the PCB,
+   which is what has happened here.</p>
+
+<p>The electrolyte is corrosive and as you can see from the photos below, can be
+quite damaging to the copper traces around it. Nearly all of the capacitors on
+the main board have leaked and corroded the copper around them, so they all had
+to be replaced.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/corrosion.JPG"><img src="http://localhost:4000/images/keyboard/corrosion.JPG" alt="Corroded copper" /></a></p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/corrosion_close.JPG"><img src="http://localhost:4000/images/keyboard/corrosion_close.JPG" alt="More corrosion" /></a></p>
+
+<p>The worst offenders were to be found in the audio output stage of the board,
+    directly after the DACs and before the connector for the amplifier. There
+    are two 5V regulators here with electrolytics around them, so I’d imagine
+    the heat from the regulators accelerated the leaking process and caused the
+    worst corrosion.</p>
+
+<h2 id="the-repair">The repair</h2>
+
+<p>I started off removing the faulty capacitors with a soldering iron resulting in
+a few lifted pads, and soon switched to a hot air station. The electrolyte
+seems to ‘stick’ the caps to the board so this wasn’t as easy as I had hoped
+but in the end, I got them all off.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/caps_removed.JPG"><img src="http://localhost:4000/images/keyboard/caps_removed.JPG" alt="Capacitors desoldered" /></a></p>
+
+<p>Reading around on electronics forums seems to show that deionised water is
+the best option for cleaning off the old electrolyte so I brushed the board
+down with water and alcohol. After removing the solder I ended up with a slightly
+cleaner board.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/cleaned.JPG"><img src="http://localhost:4000/images/keyboard/cleaned.JPG" alt="Cleaned board" /></a></p>
+
+<p>Unfortunately, the electrolyte had actually corroded away a number of traces
+and vias completely, which is almost certainly what caused the original
+problem. I fixed these traces with mod wires and solder and replaced the lifted
+pads with solder braid where necessary. I had to remove the -5V regulator to
+clean up the corrosion beneath it and in the process snapped off a leg. So that
+has now been replaced with a TO-220 package.</p>
+
+<p>In some places the electrolyte had migrated along the tracks underneath the
+soldermask. In these cases I tried to scrape off as much soldermask as possible
+and clean the copper underneath to prevent further corrosion.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/repairing_traces.JPG"><img src="http://localhost:4000/images/keyboard/repairing_traces.JPG" alt="Cleaned with tracesCleaned with traces and pads fixed and pads fixed" /></a></p>
+
+<p>I ended up replacing the caps with a variety of caps, mainly because it’s much
+easier to solder them in (especially where broken traces and mods occurred) and
+there weren’t any particular space requirements.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/finished.JPG"><img src="http://localhost:4000/images/keyboard/finished.JPG" alt="new capacitors" /></a></p>
+
+<h2 id="it-works">It Works!</h2>
+
+<p>Turning everything on, the keyboard works fairly well, there is still a slight
+tone over the notes being played, this is barely noticeable unless the treble
+is turned up but I will try to diagnose it eventually.</p>
+
+<p>I have been thinking about designing a USB midi board to interface with the
+keyboard matrix, allowing me to replace all the aging electronics with a single
+board linux computer, but this is probably some time off.</p>
+
+:ET

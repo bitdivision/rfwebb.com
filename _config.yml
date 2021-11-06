@@ -1,0 +1,19 @@
+name: Blog
+description: Electronics and Code
+meta_description: ""
+
+markdown: kramdown
+highlighter: rouge
+logo: false
+paginate: 10
+baseurl: ""
+domain_name: "https://rfwebb.com"
+google_analytics: "UA-45205367-1"
+plugins: [jekyll-paginate]
+
+# Details for the RSS feed generator
+url: ""
+author: "Richard Fortescue-Webb"
+
+# Disqus config
+disqus-shortname: ""

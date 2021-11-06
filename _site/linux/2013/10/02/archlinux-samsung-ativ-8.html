@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Blog - Electronics and Code</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css " />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Installing Arch Linux on a Samsung Ativ Book 8 (NP880Z5E)</h1>
+            <section class="post-meta">
+                
+                    on Linux
+                
+                <time class="post-date" datetime="2013-10-02">02 Oct 2013</time>
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://localhost:4000">
+                
+                    <span class="blog-title">Blog</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2013-10-02">02 Oct 2013</time>
+            
+                on Linux
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Installing Arch Linux on a Samsung Ativ Book 8 (NP880Z5E)</h1> -->
+
+        <section class="post-content">
+            <p>I recently purchased a new Samsung Ativ book 8 from <a href="http://www.bestbuy.com/site/Samsung---ATIV-Book-8-15.6%26%2334%3B-Touch-Screen-Laptop---8GB-Memory---1TB-Hard-Drive---Mineral-Ash-Black/8965053.p?id=1218957864443&amp;skuId=8965053" title="Samsung Ativ Book 8 at Best Buy">BestBuy</a>. Here I’ll
+document a few tips and tricks I found when installing both Ubuntu and Arch on
+my new laptop.</p>
+
+<p>Despite using Arch Linux for the past few years, I wanted something quick and easy to get up and running so I went back to Ubuntu. There is already some information available on this process available <a href="http://forum.notebookreview.com/samsung/723676-linux-series-7-2013-ativ-book-8-a.html">here</a> so I started going through the guide, disabled fast boot and secure boot in the BIOS, booted from USB, installed Ubuntu with default options. On reboot, I could no longer boot Windows from grub (Invalid EFI file). This was fixed by installing boot repair on Ubuntu and running it with the default settings.</p>
+
+<p>When I got to this point I was already finding Ubuntu frustrating and was unhappy with the general responsiveness of the machine so I ordered an SSD on Amazon and figured I’d start again with a fresh install of Arch Linux. I ordered the <a href="http://www.amazon.com/Samsung-Electronics-EVO-Series-2-5-Inch-MZ-7TE250BW/dp/B00E3W1726/" title="Amazon Samsung 840 Evo 250GB">250GB Samsung SSD Evo</a> which seemed to have the best price/performance ratio. So here I will document the process of installing Arch.</p>
+
+<h3 id="arch-linux">Arch Linux</h3>
+
+<p>Since the <a href="https://wiki.archlinux.org/" title="Archlinux Wiki">Arch Linux</a> wiki is such a brilliant resource, I won’t repeat the same material here. I followed the <a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide" title="Arch Linux Beginner's Guide">Beginner’s Guide</a> throughout the process and will only outline any deviations or enhancements from the guide. I will also detail the basic configuration of the system at some point, mainly for my own reference but perhaps it will be helpful to someone else.</p>
+
+<h4 id="installation">Installation</h4>
+
+<p>The installation went fairly smoothly although I did end up doing it twice. At first I tried to install everything using legacy BIOS compatibility mode, unfortunately it seems that this particular version of UEFI doesn’t really support this very well (I was using a GPT formatted disk so this could have been the problem). Another user had the same issue on a Samsung Book 7 <a href="https://bbs.archlinux.org/viewtopic.php?id=168853" title="Arch Forum - BIOS issue">here</a> and found little resolution.</p>
+
+<p>After retrying the installation with an ESC partition created for UEFI and installing GRUB, everything worked fine (just remember to <em>modprobe efivars</em> before running grub-install or <em>exit</em> from chroot and do it). On boot I installed X, the requisite video driver (<a href="https://www.archlinux.org/packages/?name=xf86-video-intel" title="xf86-video-intel package">xf86-video-intel</a>) and i3 window manager, things were starting to look familiar. Wireless was very simple, no firmware needed for the standard card.</p>
+
+<h4 id="touchpad">Touchpad</h4>
+<p>The previously linked guide suggests installing a modified Elantech touchpad driver as per this post however I simply installed the standard xf86-input-synaptics package and set up the config file with some personal preferences. The config file is located in /etc/X11/xorg.conf.d/50-synaptics.conf and my version is as follows:</p>
+
+<figure class="highlight"><pre><code class="language-ini" data-lang="ini"><span class="c"># Additional options may be added in the form of
+#   Option "OptionName" "value"
+#
+</span><span class="err">Section</span> <span class="err">"InputClass"</span>
+        <span class="err">Identifier</span> <span class="err">"touchpad</span> <span class="err">catchall"</span>
+        <span class="err">Driver</span> <span class="err">"synaptics"</span>
+        <span class="err">MatchIsTouchpad</span> <span class="err">"on"</span>
+                <span class="err">Option</span> <span class="err">"TapButton1"</span> <span class="err">"1"</span>
+                <span class="err">Option</span> <span class="err">"TapButton2"</span> <span class="err">"2"</span>
+                <span class="err">Option</span> <span class="err">"TapButton3"</span> <span class="err">"3"</span>
+                <span class="err">Option</span> <span class="err">"HorizTwoFingerScroll"</span> <span class="err">"on"</span>
+                <span class="err">Option</span> <span class="err">"VertTwoFingerScroll"</span> <span class="err">"on"</span>
+ 
+                <span class="c">#Enable single tap right click
+</span>                <span class="err">Option</span> <span class="err">"RBCornerButton"</span> <span class="err">"3"</span>
+ 
+                <span class="c">#Enable natural scrolling
+</span>                <span class="err">Option</span> <span class="err">"VertScrollDelta"</span> <span class="err">"-50"</span>
+                <span class="err">Option</span> <span class="err">"HorizScrollDelta"</span> <span class="err">"-200"</span>
+ 
+                <span class="c">#Disable touchpad while typing
+</span>                <span class="err">Option</span> <span class="err">"PalmDetect"</span> <span class="err">"1"</span>
+                <span class="err">Option</span> <span class="err">"PalmMinWidth"</span> <span class="err">"3"</span>
+ 
+ 
+<span class="c"># This option is recommend on all Linux systems using evdev, but cannot be
+# enabled by default. See the following link for details:
+# http://who-t.blogspot.com/2010/11/how-to-ignore-configuration-errors.html
+</span>        <span class="err">MatchDevicePath</span> <span class="err">"/dev/input/event*"</span>
+<span class="err">EndSection</span>
+ 
+<span class="err">Section</span> <span class="err">"InputClass"</span>
+        <span class="err">Identifier</span> <span class="err">"touchpad</span> <span class="err">ignore</span> <span class="err">duplicates"</span>
+        <span class="err">MatchIsTouchpad</span> <span class="err">"on"</span>
+        <span class="err">MatchOS</span> <span class="err">"Linux"</span>
+        <span class="err">MatchDevicePath</span> <span class="err">"/dev/input/mouse*"</span>
+        <span class="err">Option</span> <span class="err">"Ignore"</span> <span class="err">"on"</span>
+<span class="err">EndSection</span>
+ 
+<span class="c"># This option enables the bottom right corner to be a right button on
+# non-synaptics clickpads.
+# This option is only interpreted by clickpads.
+</span><span class="err">Section</span> <span class="err">"InputClass"</span>
+        <span class="err">Identifier</span> <span class="err">"Default</span> <span class="err">clickpad</span> <span class="err">buttons"</span>
+        <span class="err">MatchDriver</span> <span class="err">"synaptics"</span>
+        <span class="err">Option</span> <span class="err">"SoftButtonAreas"</span> <span class="err">"50%</span> <span class="err">0</span> <span class="err">82%</span> <span class="err">0</span> <span class="err">0</span> <span class="err">0</span> <span class="err">0</span> <span class="err">0"</span>
+<span class="c">#       To disable the bottom edge area so the buttons only work as buttons,
+#       not for movement, set the AreaBottomEdge
+#       Option "AreaBottomEdge" "82%"
+</span><span class="err">EndSection</span></code></pre></figure>
+
+<p>More information on configuring the synaptics driver can be found <a href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">here</a> on the Archwiki.</p>
+
+<p>More information on configuring the synaptics driver can be found <a href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics" title="Arch Wiki on Synaptic's Touchpad">here</a> on the Archwiki.</p>
+
+<h4 id="samsung-tools">Samsung Tools</h4>
+
+<p>There are a number of controls for the laptop which can be operated using the keyboard’s fn buttons. These include screen brightness keyboard backlight and fan speed. Unfortunately these functions require low level manipulation of the samsung firmware, so someone wrote a useful package for use on Samsung laptops, this allows things like fan control etc. Unfortunately this kernel module caused some serious problems on laptops which were booted using EFI and the kernel dev’s fix was to actually disable the functionality on any laptop booted with EFI. So if you are booting in EFI there is currently no way to control the fan but if you are booting in legacy mode you might be in luck. I haven’t actually been able to get this to work yet but I will update the article as I make progress. The samsung-tools package in AUR contains the requisite items.</p>
+
+<p>There is a frustrating lack of information available on the samsung-laptop module, the bug which bricked laptops first appeared in January 2013 and it is unclear whether a fix exists yet. Both Samsung and Ubuntu and staying quiet on that front.</p>
+
+<h4 id="volume-buttons">Volume Buttons</h4>
+
+<p>The volume buttons on the keyboard can be used to adjust the volume by finding the keycode from <em>xev</em> and using that to call a script and adjust the volume.</p>
+
+<p>Since I am using i3, this is fairly simple to do, just add the following lines to your i3 configuration</p>
+
+<figure class="highlight"><pre><code class="language-ini" data-lang="ini"><span class="c">#Laptop  Audio Controls
+</span><span class="err">bindcode</span> <span class="err">121</span> <span class="err">exec</span> <span class="err">amixer</span> <span class="err">sset</span> <span class="err">Master</span> <span class="err">toggle</span>
+<span class="err">bindcode</span> <span class="err">122</span> <span class="err">exec</span> <span class="err">amixer</span> <span class="err">sset</span> <span class="err">Master</span> <span class="err">2dB-</span>
+<span class="err">bindcode</span> <span class="err">123</span> <span class="err">exec</span> <span class="err">amixer</span> <span class="err">sset</span> <span class="err">Master</span> <span class="err">2dB+a</span></code></pre></figure>
+
+<h4 id="display-backlight">Display Backlight</h4>
+
+<p>To begin with I found no way to modify the screen’s brightness, I am unsure exactly what I did to allow this but I believe it was fixed when I installed the samsung-tools package. In any case, if you have that package you should see three files in /sys/class/backlight: acpi_video0, acpi_video1 and intel_backlight. The backlight can then be adjusted with</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">xbacklight <span class="nt">-inc</span> 10
+xbacklight <span class="nt">-dec</span> 10</code></pre></figure>
+
+<p>This can again be tied to the function keys by adding the following to your i3 configuration:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#Laptop Brightness Controls</span>
+bindcode 232 <span class="nb">exec </span>xbacklight <span class="nt">-dec</span> 10
+bindcode 233 <span class="nb">exec </span>xbacklight <span class="nt">-inc</span> 10</code></pre></figure>
+
+<h4 id="keyboard-backlight">Keyboard Backlight</h4>
+<p>After I reinstalled Arch with an MBR instead of GPT and booted in legacy BIOS mode, I could modprobe samsung-laptop so I installed the samsung-tools-git module from the AUR and the keyboard backlight started to work after a few restarts. It can be controlled using the following script:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#Turn off the backlight</span>
+<span class="nb">echo </span>0 <span class="o">&gt;</span> /sys/devices/platform/samsung/leds/samsung::kbd_backlight/brightness
+ 
+<span class="c">#Turn on the backlight full brightness</span>
+<span class="nb">echo </span>4 <span class="o">&gt;</span> /sys/devices/platform/samsung/leds/samsung::kbd_backlight/brightness</code></pre></figure>
+
+<p>So it should be possible to link this script to the keyboard backlight controls however it seems that this is under the control of the samsung-tools module. When I use xev it doesn’t register any keypress on pressing these buttons. I will update this if I find a solution for this.</p>
+
+<p>I found <a href="http://forums.linuxmint.com/viewtopic.php?f=49&#038;t=135602" title="Linux Mint Forum Troubleshooting Keyboard Backlight">this</a> thread very helpful when troubleshooting the backlight although ultimately didn’t use anything from it. It may be possible to use this to register the keypresses properly.</p>
+
+<h4 id="discrete-gpu">Discrete GPU</h4>
+<p>At this point, I noticed the laptop was running incredibly hot and looking at powerstat I found it was using about 45W! The laptop uses ATI’s hybrid graphics which is poorly supported in Linux. Currently the best thing to do is to turn off the ATI card and solely use Intel’s integrated graphics. This can be done using the acpi_call-git package using the instructions on the <a href="https://wiki.archlinux.org/index.php/Hybrid_graphics" title="Arch Wiki on hybrid Graphics">Arch wiki</a>. In my case, I added the following line to /etc/tmpfiles.d/acpi_call.conf:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">w /proc/acpi/call - - - - <span class="se">\_</span>SB.PCI0.PEG0.PEGP.SGOF</code></pre></figure>
+
+<p>Unfortunately this causes the laptop to crash on boot so I am currently just using the turn_off_gpu.sh script on every boot.</p>
+
+<p>That brings power consumption down to about 10-15 watts and the laptop is much cooler. This is far better but there’s probably still more to do. The CPU seems to still be running at full speed and the fan button doesn’t appear to do anything other than change the status in samsung-tools. I’d imagine this is a samsung-tools problem. The battery seems to last for about 5 hours with light use in its current state with the GPU turned off.</p>
+
+<p>As I find more solutions I will add the updates here.</p>
+
+<p><em>UPDATE</em>: There appear to be a few problems with using acpi call to disable the Radeon 8770M, resume on suspend takes about 10 seconds which seems to be related. It may be possible to solve this by installing the proprietary ATI catalyst drivers however I haven’t tried this yet.</p>
+
+<p><em>UPDATE 2</em>: The GPU power management seems to have been fixed in new versions
+of the kernel, I would suggest not using acpi-call.</p>
+
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">Richard Fortescue-Webb's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Richard Fortescue-Webb </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        Software Developer in Bristol, UK.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Installing Arch Linux on a Samsung Ativ Book 8 (NP880Z5E)&amp;url=https://rfwebb.com/linux/2013/10/02/archlinux-samsung-ativ-8.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://rfwebb.com/linux/2013/10/02/archlinux-samsung-ativ-8.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://rfwebb.com/linux/2013/10/02/archlinux-samsung-ativ-8.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="">Blog</a> &copy; 
+              2021 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using 
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-45205367-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>

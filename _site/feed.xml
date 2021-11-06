@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <description>Electronics and Code</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 06 Nov 2021 21:23:49 +0000</pubDate>
+    <lastBuildDate>Sat, 06 Nov 2021 21:23:49 +0000</lastBuildDate>
+    <generator>Jekyll v4.2.1</generator>
+    
+      <item>
+        <title>Repairing a Roland Digital Piano</title>
+        <description>&lt;p&gt;I’ve wanted a digital piano for some time now, and I still occasionally glance
+over the ‘spares and repairs’ category on eBay in hopes of a cheap deal.
+Finally, I found one:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/keyboard.jpg&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/keyboard.jpg&quot; alt=&quot;picture of the keyboard&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-problem&quot;&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;According to the previous owner, when she bought the piano, it was working
+fine. Over time it developed a crackle and eventually stopped producing any
+audio output whatsoever. It does however turn on and the digital stuff appears
+fine, the screen and buttons were all working.&lt;/p&gt;
+
+&lt;p&gt;Opening up the keyboard, I found a problem pretty quickly. Leaky capacitors:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/leaky.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/leaky.JPG&quot; alt=&quot;leaky capacitors&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;capacitors&quot;&gt;Capacitors&lt;/h2&gt;
+&lt;p&gt;Electrolytic capacitors are composed of a thin sheet of (usually) aluminium bathed in
+electrolyte. At the factory a dielectric oxide layer is formed on the aluminium
+by applying a voltage to it and thus creating a capacitor.&lt;/p&gt;
+
+&lt;p&gt;Over time the electrolyte in these capacitors dries out, usually causing the
+capacitance to decrease and the impedance to increase. In some cases, gas build
+up inside the capacitor and then bursts, leaking electrolyte onto the PCB,
+   which is what has happened here.&lt;/p&gt;
+
+&lt;p&gt;The electrolyte is corrosive and as you can see from the photos below, can be
+quite damaging to the copper traces around it. Nearly all of the capacitors on
+the main board have leaked and corroded the copper around them, so they all had
+to be replaced.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/corrosion.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/corrosion.JPG&quot; alt=&quot;Corroded copper&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/corrosion_close.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/corrosion_close.JPG&quot; alt=&quot;More corrosion&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The worst offenders were to be found in the audio output stage of the board,
+    directly after the DACs and before the connector for the amplifier. There
+    are two 5V regulators here with electrolytics around them, so I’d imagine
+    the heat from the regulators accelerated the leaking process and caused the
+    worst corrosion.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-repair&quot;&gt;The repair&lt;/h2&gt;
+
+&lt;p&gt;I started off removing the faulty capacitors with a soldering iron resulting in
+a few lifted pads, and soon switched to a hot air station. The electrolyte
+seems to ‘stick’ the caps to the board so this wasn’t as easy as I had hoped
+but in the end, I got them all off.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/caps_removed.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/caps_removed.JPG&quot; alt=&quot;Capacitors desoldered&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Reading around on electronics forums seems to show that deionised water is
+the best option for cleaning off the old electrolyte so I brushed the board
+down with water and alcohol. After removing the solder I ended up with a slightly
+cleaner board.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/cleaned.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/cleaned.JPG&quot; alt=&quot;Cleaned board&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the electrolyte had actually corroded away a number of traces
+and vias completely, which is almost certainly what caused the original
+problem. I fixed these traces with mod wires and solder and replaced the lifted
+pads with solder braid where necessary. I had to remove the -5V regulator to
+clean up the corrosion beneath it and in the process snapped off a leg. So that
+has now been replaced with a TO-220 package.&lt;/p&gt;
+
+&lt;p&gt;In some places the electrolyte had migrated along the tracks underneath the
+soldermask. In these cases I tried to scrape off as much soldermask as possible
+and clean the copper underneath to prevent further corrosion.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/repairing_traces.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/repairing_traces.JPG&quot; alt=&quot;Cleaned with tracesCleaned with traces and pads fixed and pads fixed&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I ended up replacing the caps with a variety of caps, mainly because it’s much
+easier to solder them in (especially where broken traces and mods occurred) and
+there weren’t any particular space requirements.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/keyboard/finished.JPG&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/keyboard/finished.JPG&quot; alt=&quot;new capacitors&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;it-works&quot;&gt;It Works!&lt;/h2&gt;
+
+&lt;p&gt;Turning everything on, the keyboard works fairly well, there is still a slight
+tone over the notes being played, this is barely noticeable unless the treble
+is turned up but I will try to diagnose it eventually.&lt;/p&gt;
+
+&lt;p&gt;I have been thinking about designing a USB midi board to interface with the
+keyboard matrix, allowing me to replace all the aging electronics with a single
+board linux computer, but this is probably some time off.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
+        <link>http://localhost:4000/electronics/2015/02/01/digital-piano-repair.html</link>
+        <guid isPermaLink="true">http://localhost:4000/electronics/2015/02/01/digital-piano-repair.html</guid>
+        
+        <category>repair</category>
+        
+        <category>piano</category>
+        
+        <category>electronics</category>
+        
+        
+        <category>Electronics</category>
+        
+      </item>
+    
+      <item>
+        <title>Installing Arch Linux on a Samsung Ativ Book 8 (NP880Z5E)</title>
+        <description>&lt;p&gt;I recently purchased a new Samsung Ativ book 8 from &lt;a href=&quot;http://www.bestbuy.com/site/Samsung---ATIV-Book-8-15.6%26%2334%3B-Touch-Screen-Laptop---8GB-Memory---1TB-Hard-Drive---Mineral-Ash-Black/8965053.p?id=1218957864443&amp;amp;skuId=8965053&quot; title=&quot;Samsung Ativ Book 8 at Best Buy&quot;&gt;BestBuy&lt;/a&gt;. Here I’ll
+document a few tips and tricks I found when installing both Ubuntu and Arch on
+my new laptop.&lt;/p&gt;
+
+&lt;p&gt;Despite using Arch Linux for the past few years, I wanted something quick and easy to get up and running so I went back to Ubuntu. There is already some information available on this process available &lt;a href=&quot;http://forum.notebookreview.com/samsung/723676-linux-series-7-2013-ativ-book-8-a.html&quot;&gt;here&lt;/a&gt; so I started going through the guide, disabled fast boot and secure boot in the BIOS, booted from USB, installed Ubuntu with default options. On reboot, I could no longer boot Windows from grub (Invalid EFI file). This was fixed by installing boot repair on Ubuntu and running it with the default settings.&lt;/p&gt;
+
+&lt;p&gt;When I got to this point I was already finding Ubuntu frustrating and was unhappy with the general responsiveness of the machine so I ordered an SSD on Amazon and figured I’d start again with a fresh install of Arch Linux. I ordered the &lt;a href=&quot;http://www.amazon.com/Samsung-Electronics-EVO-Series-2-5-Inch-MZ-7TE250BW/dp/B00E3W1726/&quot; title=&quot;Amazon Samsung 840 Evo 250GB&quot;&gt;250GB Samsung SSD Evo&lt;/a&gt; which seemed to have the best price/performance ratio. So here I will document the process of installing Arch.&lt;/p&gt;
+
+&lt;h3 id=&quot;arch-linux&quot;&gt;Arch Linux&lt;/h3&gt;
+
+&lt;p&gt;Since the &lt;a href=&quot;https://wiki.archlinux.org/&quot; title=&quot;Archlinux Wiki&quot;&gt;Arch Linux&lt;/a&gt; wiki is such a brilliant resource, I won’t repeat the same material here. I followed the &lt;a href=&quot;https://wiki.archlinux.org/index.php/Beginners%27_Guide&quot; title=&quot;Arch Linux Beginner&apos;s Guide&quot;&gt;Beginner’s Guide&lt;/a&gt; throughout the process and will only outline any deviations or enhancements from the guide. I will also detail the basic configuration of the system at some point, mainly for my own reference but perhaps it will be helpful to someone else.&lt;/p&gt;
+
+&lt;h4 id=&quot;installation&quot;&gt;Installation&lt;/h4&gt;
+
+&lt;p&gt;The installation went fairly smoothly although I did end up doing it twice. At first I tried to install everything using legacy BIOS compatibility mode, unfortunately it seems that this particular version of UEFI doesn’t really support this very well (I was using a GPT formatted disk so this could have been the problem). Another user had the same issue on a Samsung Book 7 &lt;a href=&quot;https://bbs.archlinux.org/viewtopic.php?id=168853&quot; title=&quot;Arch Forum - BIOS issue&quot;&gt;here&lt;/a&gt; and found little resolution.&lt;/p&gt;
+
+&lt;p&gt;After retrying the installation with an ESC partition created for UEFI and installing GRUB, everything worked fine (just remember to &lt;em&gt;modprobe efivars&lt;/em&gt; before running grub-install or &lt;em&gt;exit&lt;/em&gt; from chroot and do it). On boot I installed X, the requisite video driver (&lt;a href=&quot;https://www.archlinux.org/packages/?name=xf86-video-intel&quot; title=&quot;xf86-video-intel package&quot;&gt;xf86-video-intel&lt;/a&gt;) and i3 window manager, things were starting to look familiar. Wireless was very simple, no firmware needed for the standard card.&lt;/p&gt;
+
+&lt;h4 id=&quot;touchpad&quot;&gt;Touchpad&lt;/h4&gt;
+&lt;p&gt;The previously linked guide suggests installing a modified Elantech touchpad driver as per this post however I simply installed the standard xf86-input-synaptics package and set up the config file with some personal preferences. The config file is located in /etc/X11/xorg.conf.d/50-synaptics.conf and my version is as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Additional options may be added in the form of
+#   Option &quot;OptionName&quot; &quot;value&quot;
+#
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Section&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;InputClass&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;Identifier&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;touchpad&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;catchall&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;Driver&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;synaptics&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;MatchIsTouchpad&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;on&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;TapButton1&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;1&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;TapButton2&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;2&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;TapButton3&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;3&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;HorizTwoFingerScroll&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;on&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;VertTwoFingerScroll&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;on&quot;&lt;/span&gt;
+ 
+                &lt;span class=&quot;c&quot;&gt;#Enable single tap right click
+&lt;/span&gt;                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;RBCornerButton&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;3&quot;&lt;/span&gt;
+ 
+                &lt;span class=&quot;c&quot;&gt;#Enable natural scrolling
+&lt;/span&gt;                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;VertScrollDelta&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;-50&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;HorizScrollDelta&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;-200&quot;&lt;/span&gt;
+ 
+                &lt;span class=&quot;c&quot;&gt;#Disable touchpad while typing
+&lt;/span&gt;                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;PalmDetect&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;1&quot;&lt;/span&gt;
+                &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;PalmMinWidth&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;3&quot;&lt;/span&gt;
+ 
+ 
+&lt;span class=&quot;c&quot;&gt;# This option is recommend on all Linux systems using evdev, but cannot be
+# enabled by default. See the following link for details:
+# http://who-t.blogspot.com/2010/11/how-to-ignore-configuration-errors.html
+&lt;/span&gt;        &lt;span class=&quot;err&quot;&gt;MatchDevicePath&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;/dev/input/event*&quot;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;EndSection&lt;/span&gt;
+ 
+&lt;span class=&quot;err&quot;&gt;Section&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;InputClass&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;Identifier&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;touchpad&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;ignore&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;duplicates&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;MatchIsTouchpad&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;on&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;MatchOS&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;Linux&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;MatchDevicePath&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;/dev/input/mouse*&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;Ignore&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;on&quot;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;EndSection&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;# This option enables the bottom right corner to be a right button on
+# non-synaptics clickpads.
+# This option is only interpreted by clickpads.
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Section&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;InputClass&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;Identifier&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;Default&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;clickpad&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;buttons&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;MatchDriver&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;synaptics&quot;&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt;Option&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;SoftButtonAreas&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;50%&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;82%&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;0&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#       To disable the bottom edge area so the buttons only work as buttons,
+#       not for movement, set the AreaBottomEdge
+#       Option &quot;AreaBottomEdge&quot; &quot;82%&quot;
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;EndSection&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;More information on configuring the synaptics driver can be found &lt;a href=&quot;https://wiki.archlinux.org/index.php/Touchpad_Synaptics&quot;&gt;here&lt;/a&gt; on the Archwiki.&lt;/p&gt;
+
+&lt;p&gt;More information on configuring the synaptics driver can be found &lt;a href=&quot;https://wiki.archlinux.org/index.php/Touchpad_Synaptics&quot; title=&quot;Arch Wiki on Synaptic&apos;s Touchpad&quot;&gt;here&lt;/a&gt; on the Archwiki.&lt;/p&gt;
+
+&lt;h4 id=&quot;samsung-tools&quot;&gt;Samsung Tools&lt;/h4&gt;
+
+&lt;p&gt;There are a number of controls for the laptop which can be operated using the keyboard’s fn buttons. These include screen brightness keyboard backlight and fan speed. Unfortunately these functions require low level manipulation of the samsung firmware, so someone wrote a useful package for use on Samsung laptops, this allows things like fan control etc. Unfortunately this kernel module caused some serious problems on laptops which were booted using EFI and the kernel dev’s fix was to actually disable the functionality on any laptop booted with EFI. So if you are booting in EFI there is currently no way to control the fan but if you are booting in legacy mode you might be in luck. I haven’t actually been able to get this to work yet but I will update the article as I make progress. The samsung-tools package in AUR contains the requisite items.&lt;/p&gt;
+
+&lt;p&gt;There is a frustrating lack of information available on the samsung-laptop module, the bug which bricked laptops first appeared in January 2013 and it is unclear whether a fix exists yet. Both Samsung and Ubuntu and staying quiet on that front.&lt;/p&gt;
+
+&lt;h4 id=&quot;volume-buttons&quot;&gt;Volume Buttons&lt;/h4&gt;
+
+&lt;p&gt;The volume buttons on the keyboard can be used to adjust the volume by finding the keycode from &lt;em&gt;xev&lt;/em&gt; and using that to call a script and adjust the volume.&lt;/p&gt;
+
+&lt;p&gt;Since I am using i3, this is fairly simple to do, just add the following lines to your i3 configuration&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Laptop  Audio Controls
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;bindcode&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;121&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;amixer&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;sset&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Master&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;toggle&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;bindcode&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;122&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;amixer&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;sset&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Master&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;2dB-&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;bindcode&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;123&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;amixer&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;sset&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;Master&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;2dB+a&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;display-backlight&quot;&gt;Display Backlight&lt;/h4&gt;
+
+&lt;p&gt;To begin with I found no way to modify the screen’s brightness, I am unsure exactly what I did to allow this but I believe it was fixed when I installed the samsung-tools package. In any case, if you have that package you should see three files in /sys/class/backlight: acpi_video0, acpi_video1 and intel_backlight. The backlight can then be adjusted with&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;xbacklight &lt;span class=&quot;nt&quot;&gt;-inc&lt;/span&gt; 10
+xbacklight &lt;span class=&quot;nt&quot;&gt;-dec&lt;/span&gt; 10&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This can again be tied to the function keys by adding the following to your i3 configuration:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Laptop Brightness Controls&lt;/span&gt;
+bindcode 232 &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;xbacklight &lt;span class=&quot;nt&quot;&gt;-dec&lt;/span&gt; 10
+bindcode 233 &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;xbacklight &lt;span class=&quot;nt&quot;&gt;-inc&lt;/span&gt; 10&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;keyboard-backlight&quot;&gt;Keyboard Backlight&lt;/h4&gt;
+&lt;p&gt;After I reinstalled Arch with an MBR instead of GPT and booted in legacy BIOS mode, I could modprobe samsung-laptop so I installed the samsung-tools-git module from the AUR and the keyboard backlight started to work after a few restarts. It can be controlled using the following script:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Turn off the backlight&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;0 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /sys/devices/platform/samsung/leds/samsung::kbd_backlight/brightness
+ 
+&lt;span class=&quot;c&quot;&gt;#Turn on the backlight full brightness&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;4 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /sys/devices/platform/samsung/leds/samsung::kbd_backlight/brightness&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;So it should be possible to link this script to the keyboard backlight controls however it seems that this is under the control of the samsung-tools module. When I use xev it doesn’t register any keypress on pressing these buttons. I will update this if I find a solution for this.&lt;/p&gt;
+
+&lt;p&gt;I found &lt;a href=&quot;http://forums.linuxmint.com/viewtopic.php?f=49&amp;#038;t=135602&quot; title=&quot;Linux Mint Forum Troubleshooting Keyboard Backlight&quot;&gt;this&lt;/a&gt; thread very helpful when troubleshooting the backlight although ultimately didn’t use anything from it. It may be possible to use this to register the keypresses properly.&lt;/p&gt;
+
+&lt;h4 id=&quot;discrete-gpu&quot;&gt;Discrete GPU&lt;/h4&gt;
+&lt;p&gt;At this point, I noticed the laptop was running incredibly hot and looking at powerstat I found it was using about 45W! The laptop uses ATI’s hybrid graphics which is poorly supported in Linux. Currently the best thing to do is to turn off the ATI card and solely use Intel’s integrated graphics. This can be done using the acpi_call-git package using the instructions on the &lt;a href=&quot;https://wiki.archlinux.org/index.php/Hybrid_graphics&quot; title=&quot;Arch Wiki on hybrid Graphics&quot;&gt;Arch wiki&lt;/a&gt;. In my case, I added the following line to /etc/tmpfiles.d/acpi_call.conf:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;w /proc/acpi/call - - - - &lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;SB.PCI0.PEG0.PEGP.SGOF&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Unfortunately this causes the laptop to crash on boot so I am currently just using the turn_off_gpu.sh script on every boot.&lt;/p&gt;
+
+&lt;p&gt;That brings power consumption down to about 10-15 watts and the laptop is much cooler. This is far better but there’s probably still more to do. The CPU seems to still be running at full speed and the fan button doesn’t appear to do anything other than change the status in samsung-tools. I’d imagine this is a samsung-tools problem. The battery seems to last for about 5 hours with light use in its current state with the GPU turned off.&lt;/p&gt;
+
+&lt;p&gt;As I find more solutions I will add the updates here.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;UPDATE&lt;/em&gt;: There appear to be a few problems with using acpi call to disable the Radeon 8770M, resume on suspend takes about 10 seconds which seems to be related. It may be possible to solve this by installing the proprietary ATI catalyst drivers however I haven’t tried this yet.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;UPDATE 2&lt;/em&gt;: The GPU power management seems to have been fixed in new versions
+of the kernel, I would suggest not using acpi-call.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 02 Oct 2013 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/linux/2013/10/02/archlinux-samsung-ativ-8.html</link>
+        <guid isPermaLink="true">http://localhost:4000/linux/2013/10/02/archlinux-samsung-ativ-8.html</guid>
+        
+        <category>linux</category>
+        
+        <category>arch</category>
+        
+        
+        <category>Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Spirit Circuits &amp;#8216;Go Naked&amp;#8217; PCB Prototype Review</title>
+        <description>&lt;p&gt;I recently used the &lt;em&gt;free&lt;/em&gt; &lt;a href=&quot;http://www.spiritcircuits.com/services/go-naked&quot; title=&quot;The Go Naked Prototyping Service&quot;&gt;‘Go Naked’&lt;/a&gt; service from Spirit Circuits to produce a prototype PCB used in a &lt;a href=&quot;http://localhost:4000/projects/sous-vide-part-1/&quot; title=&quot;Sous-Vide Controller Part 1 – Design&quot;&gt;sous-vide controller&lt;/a&gt;. Overall I was extremely satisfied with the service, although I couldn’t quite believe it was actually free to begin with, so hopefully this short review will give others an idea of what to expect.&lt;/p&gt;
+
+&lt;p&gt;Having previously used their PCB Snap service, I knew that Spirit Circuits produced high quality boards however given the price of these prototypes, I was worried the quality wouldn’t be great. Luckily I was proved wrong. After enquiring about the service I was given the following information about the board specifications:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Min Track – 5 thou – 0.127 mm&lt;/li&gt;
+  &lt;li&gt;Gap – 5 thou – 0.127 mm&lt;/li&gt;
+  &lt;li&gt;Annular – 5 Thou – 0.127 mm&lt;/li&gt;
+  &lt;li&gt;Minimum Hole size – 0.3 mm&lt;/li&gt;
+  &lt;li&gt;Minimum Annulus – 5 thou – 0.127 mm&lt;/li&gt;
+  &lt;li&gt;Max size (FR4): 406 mm x 457 mm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The boards have no routing, soldermask or silkscreen so they are very much prototype boards. They’re finished in immersion silver. After sending my gerber files over, they confirmed I was in the queue and my order would be processed within 5 days. I received the board 5 days later. Each customer gets three chance to prototype a board before they need to submit something to one of the paid services.&lt;/p&gt;
+
+&lt;p&gt;The boards came vacuum packed in a kind of hard plastic shell with bubble wrap, so oxidation and scratching weren’t a problem. The final board looked like this:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/GoNaked-review/DSC_6261-Edit.jpg&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/GoNaked-review/DSC_6261-Edit-700x478.jpg&quot; alt=&quot;board&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can probably see in the photo, there is a small amount of oxidation, this was probably due to my fingers on the board although it did seem to get a little worse over the next few days so perhaps oxidation in air is a problem. I did find that the advertising around the edge of the board was a little bit of a pain, I’m happy for them to have it there but it would have been very helpful to v-groove the board outline just so that a prototypes dimensions could be checked.&lt;/p&gt;
+
+&lt;p&gt;Admittedly, this wasn’t a particularly challenging board to produce, next time I’ll include a test area to max out all their specifications but I doubt there will be any problems.&lt;/p&gt;
+
+&lt;p&gt;You can see a gallery of images showing the PCB &lt;a href=&quot;http://imgur.com/a/aG1Jp&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 29 Aug 2013 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/electronics/2013/08/29/spirit-circuits-go-naked-pcb-prototype-review.html</link>
+        <guid isPermaLink="true">http://localhost:4000/electronics/2013/08/29/spirit-circuits-go-naked-pcb-prototype-review.html</guid>
+        
+        <category>sous-vide</category>
+        
+        <category>electronics</category>
+        
+        <category>PCB</category>
+        
+        <category>Spirit Circuits</category>
+        
+        <category>GoNaked</category>
+        
+        
+        <category>Electronics</category>
+        
+      </item>
+    
+      <item>
+        <title>Sous-Vide Controller Part 2 &amp;#8211; Building and Testing</title>
+        <description>&lt;p&gt;I previously &lt;a href=&quot;/projects/2013/06/14/sous-vide-part-1.html&quot; title=&quot;Sous-Vide Controller Part 1 – Design&quot;&gt;wrote&lt;/a&gt; about designing a temperature controller for sous-vide
+cooking. Here I will go through the process of building and testing the
+controller.&lt;/p&gt;
+
+&lt;p&gt;To produce the PCB I used a &lt;a href=&quot;http://www.spiritcircuits.com/services/go-naked&quot; title=&quot;Spirit Circuits &apos;Go Naked&apos; Prototyping Service&quot;&gt;free service&lt;/a&gt; from Spirit Circuits in the UK. They allow customers to order three bare PCBs free before they have to buy anything, which is extremely useful for prototyping boards. I have a review on my blog &lt;a href=&quot;http://localhost:4000/electronics/spirit-circuits-go-naked-pcb-prototype-review/&quot; title=&quot;Spirit Circuits ‘Go Naked’ PCB Prototype Review&quot;&gt;here&lt;/a&gt;. The boards came out quite well although I did have a few problems with the design.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-2/DSC_6261-Edit.jpg&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-2/DSC_6261-Edit-700x478.jpg&quot; alt=&quot;prototype pcb&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;circuit-issues&quot;&gt;Circuit Issues&lt;/h2&gt;
+
+&lt;p&gt;There were a number of small problems with the schematic which resulted in a few mod wires on the board. First of all, I neglected to properly read the datasheet for the ATmega168 and didn’t realise that the two extra pins on the surface mount package, ADC6 and ADC7, can only be used as analogue pins. This wasn’t a huge problem, I removed the buzzer and used one of the pins for the ADC as replacements, however it did mean that I didn’t have enough pins free to actually run the analogue temperature side.&lt;/p&gt;
+
+&lt;p&gt;In fact, the analogue temperature measurement side of the circuit was not without its own problems, I managed to order the wrong type of voltage reference to begin with which was solved by tying the reference pin of the ADC to +5V however the main problem concerned the current source. The &lt;a href=&quot;http://www.nxp.com/documents/data_sheet/PSSI2021SAY.pdf‎&quot; title=&quot;PSSI2021SAY Current Source Datasheet&quot;&gt;PSSI2021SAY&lt;/a&gt; is a very simple current source consisting of a single PNP transistor and some diodes and resistors. As it turns out this doesn’t actually produce a particularly &lt;em&gt;constant&lt;/em&gt; current source. For many applications this would probably be fine however in this case, I needed a current source that does not vary to any significant degree since the temperature calculation is based on the current through the thermistor. I actually measured variations over the range of about 15% which wasn’t really acceptable. It may be possible to calibrate out the variation in current but in the end I decided to scrap the analogue section and get everything working with the Dallas digital temperature sensor.&lt;/p&gt;
+
+&lt;p&gt;I also somehow inverted the input pins for the op-amps on the schematics so feedback was being applied to the non-inverting input. Trying to fix this with mod wires on a surface mount package was a huge pain and really made me reconsider ever doing very early stage prototyping with SMD components again.&lt;/p&gt;
+
+&lt;h2 id=&quot;soldering-and-heat-guns&quot;&gt;Soldering and Heat Guns&lt;/h2&gt;
+
+&lt;p&gt;For the most part, soldering all the components with an iron wasn’t really a problem, although solder-wick did turn out to be extremely useful for the tight pitch packages. I made one big mistake while putting the board together, I soldered the AVR in upside-down. I have no idea how I managed to do this, but after realising the problem I needed to remove the chip. Using a soldering iron and solder-wick really didn’t work, it’s impossible to get all of the solder out from beneath the pads. In the end I used a heat gun intended for stripping paint – obviously the wrong tool for the job but I haven’t yet appropriated a hot air soldering station. The heat gun actually works fairly well when used carefully, but even on its lowest setting, it is far too hot for soldering. Somehow the chip remained intact after removal and actually worked although I did scorch some of the plastic connectors on the board.&lt;/p&gt;
+
+&lt;p&gt;Once I had the chip oriented correctly, I started writing the software but I was still having problems programming the chip. As it turned out, the firmware on the old USBasp programmer I was using was corrupted. So with a new programmer I was making progress until the chip’s fuses were set incorrectly while programming. I’m not sure what they were set to but I it essentially bricked the chip (I did try a few clock sources but to no avail). Once again I needed to remove the chip. This time the heat gun was also fairly successful and with a new chip I continued writing code. At some point I ran out of space on the chip, I’m unsure exactly how this happened and haven’t really had a chance to look at the size of all the libraries I used but the program was now around 20 kB, too large for the 16 kB of flash on the ATmega168. Finally I decided to switch to an ATmega328 which is pin compatible. This time I was not so lucky with the heat gun, the board had been abused enough and I ended up with a lot of lifted pads and tracks. Eventually I solved all of these with mod wires or solder bridges but the solution wasn’t ideal.&lt;/p&gt;
+
+&lt;p&gt;Throughout the project I had numerous problems with the LCD connection. I used a simple ribbon cable to connect the LCD to the PCB and as you’d expect, when the board is moved around a fair bit, the weakest joint fatigues and breaks away. It is of course possible to solder these back on but it becomes somewhat difficult after a few breaks. If I were to do this board again, I would use IDC connectors for the LCD; although they add a remove a little space from the board, they make connections much simpler.&lt;/p&gt;
+
+&lt;p&gt;I hindsight, I definitely would have created the board with through-hole chips where possible, it makes removing and reworking everything far simpler, although I suppose that with a hot air station the board would likely have fared much better.&lt;/p&gt;
+
+&lt;h2 id=&quot;construction&quot;&gt;Construction&lt;/h2&gt;
+
+&lt;p&gt;The PCB was mounted to the lid of the case using brass spacers, these were sized to place the light pipes directly above the SMD LEDs on the underside of the board. I was somewhat overzealous while filing out the hole for the LCD so there is a slight gap between the edge of the plastic and the LCD. The transformer and SSR were both mounted on the bottom of the box and their screws were earthed. I later realised that it would be a good idea to also earth reference the PCB just in case the live wire from the socket came free and contacted the board. The final version of the front panel looks like this:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-2/DSC_6453.jpg&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-2/DSC_6453-700x464.jpg&quot; alt=&quot;Front panel&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I was somewhat worried that the SSR would get somewhat warm without a heatsink however with the low power of rice cookers and other heating elements that the controller would likely be used with, it wasn’t a problem at all. If a higher power element was used, it would be a good idea to add some sort of heatsink or at least some ventilation.&lt;/p&gt;
+
+&lt;p&gt;The temperature probe was designed to be connected via a stereo headphone jack (3.5mm). This allows headphone cables to be repurposed and gives the three connections required for the sensor (although the sensor can be powered from the data line, using a discrete power connection generally seems more reliable). The temperature sensor was soldered onto the leads from the headphone cable and insulated with heatshrink. Next, an aluminium tube was cut to size and filled with a little thermally conductive epoxy. This gives a reasonably good thermal connection to the sensor. Finally the tube was injected with normal epoxy (much less expensive) to fill the gaps and seal the ends. The final result is shown below:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-2/DSC_6436.jpg&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-2/DSC_6436-700x464.jpg&quot; alt=&quot;Temperature probe&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;During testing, I had some problems with interference on the temperature probe which caused the software to stop reading temperatures, although this was alleviated by using shielded cables to the PCB, there is still room for improvement.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-next-version&quot;&gt;The Next Version&lt;/h2&gt;
+
+&lt;p&gt;Overall, I was fairly satisfied with the project. The main problem with the technique is that it lacks a circulator to redistribute the water around the vessel. This led to temperature differentials within the water bath of up to 4 °C which could be a real problem when cooking steak or something similar. For some reason, this didn’t really affect the results too much, the steak below was cooked at 55.5 °C for about one hour.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-2/DSC_6225.jpg&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-2/DSC_6225-700x464.jpg&quot; alt=&quot;Steak&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I will at some point produce another prototype, however I think I will move towards an immersion style heater, most likely built into a water bath with a circulator. Although this removes the possibility of using different size baths, I doubt I will ever need a huge amount of space, whatever is being cooked can generally be cut into pieces and done in batches if necessary. I will definitely use either a thermistor or RTD in the next version, although the final accuracy wouldn’t be that important, the resolution would probably be useful for the control algorithms. Also useful would be a quicker response time on the temperature sensor however this was much improved by using thermally conductive epoxy.&lt;/p&gt;
+
+&lt;p&gt;Another issue is the size of the controller. To fit everything on the front panel, I had to use a very large box, I think perhaps the best idea for miniaturizing it is to use a wall plug power meter case, like the kill-a-watt, but this means using some sort of reactive dropper or off-line switcher. I didn’t really want to be testing non isolated boards on the mains along with all the other electronics so I left this for a future version.&lt;/p&gt;
+
+&lt;p&gt;I have included most of the photos taken during the project in an album available &lt;a href=&quot;http://imgur.com/a/aG1Jp&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 18 Jun 2013 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/projects/2013/06/18/sous-vide-part-2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/projects/2013/06/18/sous-vide-part-2.html</guid>
+        
+        <category>sous-vide</category>
+        
+        <category>electronics</category>
+        
+        
+        <category>Projects</category>
+        
+      </item>
+    
+      <item>
+        <title>Sous-Vide Controller Part 1 &amp;#8211; Design</title>
+        <description>&lt;p&gt;Sous-vide cooking involves sealing food inside a bag (generally in a vacuum) and immersing the bag in a water bath at a carefully controlled temperature. Generally the water bath is kept at a fairly low temeperature – around 60 °C. By using such a low temperature it is possible to cook the item to an even temperature throughout, so a steak could be cooked to medium all the way through and then seared on the outside to give a result like the picture shown at the top of this page.&lt;/p&gt;
+
+&lt;p&gt;Currently, commercial sous-vide cookers are very expensive. Prices have come down over the past few years but the cheapest model on Amazon is still &lt;a href=&quot;http://www.amazon.co.uk/SousVide-Water-Oven-Bath-Cooking/dp/B00AQ8ZZQU/&quot; title=&quot;Sous-vide Water Oven&quot;&gt;£126&lt;/a&gt;, somewhat more than I was willing to pay. So I decided to make my own version. While open source controllers do exist, like &lt;a href=&quot;http://lowereastkitchen.com&quot; title=&quot;Lower East Kitchen - Ember Kit&quot;&gt;the ember kit&lt;/a&gt;, they are not easily available and I’d prefer to build my own anyway. The following roughly documents the design process of my controller.&lt;/p&gt;
+
+&lt;h2 id=&quot;types-of-sous-vide-cooker&quot;&gt;Types of sous-vide cooker&lt;/h2&gt;
+
+&lt;p&gt;There are currently two common methods of creating a sous-vide bath: immersion heaters and those with an element outside of the water container. Immersion heaters are generally portable and can be attached to any container which is a huge advantage if you ever need to cook a large item. Kickstarter has recently had two sous-vide controllers based on both methods, the &lt;a href=&quot;http://nomiku.com&quot;&gt;Nomiku&lt;/a&gt;, an immersion heater and the &lt;a href=&quot;http://www.kickstarter.com/projects/codlo/codlo-a-powerful-compact-controller-for-sous-vide&quot;&gt;Codlo&lt;/a&gt;, which allows any heating appliance like a rice cooker to be used as a water bath.&lt;/p&gt;
+
+&lt;p&gt;I eventually decided to build something like the Codlo, since it is far simpler to build and doesn’t really require the water in the bath to be circulated which would require something like an aquarium pump.&lt;/p&gt;
+
+&lt;h2 id=&quot;box-and-interface&quot;&gt;Box and Interface&lt;/h2&gt;
+
+&lt;p&gt;Having a plug-to-plug case something like the Codlo’s would be perfect however there’s nothing available like that and while it would be possible to make a box with both plug and socket, I decided in the end to just use a large ABS box from Maplin (the &lt;a href=&quot;http://www.maplin.co.uk/mb-plastic-boxes-1676&quot;&gt;MB4 enclosure&lt;/a&gt;) and mount a socket on the top. The box is large enough to mount a mains socket on one side and an LCD and interface buttons on the other. While I was working out the dimensions I drew up a quick mock-up:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-1/mockup.png&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-1/mockup-700x433.png&quot; alt=&quot;enclosure mockup&quot; title=&quot;A mockup of the enclosure&apos;s front panel&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The LCD can be used to display the temperature and current state of the cooker. The only input is a rotary encoder, this allows the desired temperature to be adjusted easily and also includes a push-button. I’ve also included a timer function, this allows the controller to turn off the heater when the timer finishes and a buzzer will sound to let the user know when the food is done.&lt;/p&gt;
+
+&lt;h2 id=&quot;temperature-sensor&quot;&gt;Temperature Sensor&lt;/h2&gt;
+
+&lt;p&gt;One of the main objectives of any sous-vide controller is accurate temperature control and as such the choice of temperature sensor is key. I’ll quickly go over the four options.&lt;/p&gt;
+
+&lt;p&gt;First, and probably most popular is the K-type thermocouple. Thermocouples make use of the Seebeck effect to generate a voltage proportional to the temperature of their junctions, this voltage is normally in the mV range and must be amplified before digitizing. K-type probes are widely available and are not that hard to implement well however their inherent accuracy is not particularly high, it’s often quoted as ±1 °C and drift can become a problem.&lt;/p&gt;
+
+&lt;p&gt;RTDs (Resistance temperature detectors) – These devices generally have much higher accuracy than thermocouples, up to 0.01 °C apparently, however they are more expensive and require slightly more complex electronics.&lt;/p&gt;
+
+&lt;p&gt;Thermistors – Thermistors are essentially similar to RTDs in that their resistance varies with temperature. The difference is that the range of resistance over a small temperature range is much higher and accuracy can again be as high as 0.01 °C. Thermistors come in a number of varieties, differentiated by their resistance at 25 °C and their accuracy. One problem is that the temperature for a given resistance is not trivial to calculate, and some datasheets don’t actually list the required coefficients for accurate calculation.&lt;/p&gt;
+
+&lt;p&gt;Digital Temperature Sensors – Popularised by Maxim, these parts output a calibrated temperature accurate to within 0.5 °C on a one-wire bus. They are extremely easy to interface to and have high enough accuracy for most applications.&lt;/p&gt;
+
+&lt;p&gt;After some thought I eventually decided to use both a thermistor and a digital temperature sensor in my design, I wanted high accuracy and hence a thermistor seemed to be the best option (although I may change this to an RTD in the next prototype). The most common method for reading temperatures from a thermistor is to use a simple potential divider but this has fundamental issues and does not give very high accuracy. I used a slightly less common method of interfacing with the thermistor to achieve slightly higher accuracy. This is of course probably unnecessary. Although websites often state that super accuracy is the most important part of sous-vide, I can’t really see there being any problem with using a sensor accurate to 1 °C. That’s why I also included a digital sensor in my design, to make getting the basic control algorithms up and running a bit easier, and also just in case my thermistor circuit didn’t work (I didn’t have a chance to test it).&lt;/p&gt;
+
+&lt;h2 id=&quot;circuit-and-pcb&quot;&gt;Circuit and PCB&lt;/h2&gt;
+
+&lt;p&gt;I recently came across a free PCB prototyping service from &lt;a href=&quot;http://www.spiritcircuits.com&quot;&gt;Spirit Circuits&lt;/a&gt; – their &lt;a href=&quot;http://www.spiritcircuits.com/services/go-naked&quot;&gt;‘GoNaked’&lt;/a&gt; option. This allows you to produce three prototype PCBs with no soldermask or silkscreen for free before you buy a board from them. It sounded like a fantastic service so I put together a PCB for this design. I ended up using a majority of surface mount parts just to see how well I could solder them without soldermask.&lt;/p&gt;
+
+&lt;p&gt;The design revolves around a control loop to keep the temperature constant in the water bath, this will probably involve a PID loop. The temperature of the water is sensed by either of the two sensors and the power to the appliance is modulated through an SSR. The schematic is shown below:&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-1/schematic.png&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-1/schematic-700x453.png&quot; alt=&quot;Schematic&quot; title=&quot;Schematic&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The circuit is based around an ATmega168, this means its compatible with the Arduino bootloader and makes the software a little easier. The schematic is fairly simple. Power comes in from a transformer and is rectified and regulated, all the AVR circuitry is standard. The only unusual part is the thermistor sense circuit. I based the design on an application note from TI – &lt;a href=&quot;http://www.ti.com/general/docs/litabsmultiplefilelist.tsp?literatureNumber=sloa052&quot;&gt;SLOA052&lt;/a&gt;. Essentially, there are two problems with the standard method of using a potential divider to measure a thermistor’s voltage drop: non-linearities are introduced and the thermistor may be subject to self heating. By using a current source to pass a very small current through the thermistor and measuring the resulting voltage, both problems can be avoided. The voltage across the thermistor is then amplified and offset to move it into the range of an ADC.&lt;/p&gt;
+
+&lt;p&gt;I ended up using an &lt;a href=&quot;http://www.linear.com/docs/26279&quot;&gt;LTC2452&lt;/a&gt; for the ADC. This is almost certainly overkill, and a 12-bit ADC could be used instead but the LTC2452 met my requirements and was a reasonable price. There are actually a couple of components which could be changed for cheaper / lower performance parts, the op-amp is likely better than it needs to be and the current source could be implemented discretely to lower the cost. Most of the parts were what I had on hand from previous sample orders.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-1/board.png&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-1/board-700x470.png&quot; alt=&quot;Board Diagram&quot; title=&quot;The layout of the PCB&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The PCB design was more rushed than I would have liked and as such I’ve already noticed a few mistakes, but I’ll detail those after I’ve built it up and tested it. I designed the board to mount directly under the lid of the box below the LCD. The rotary encoder is mounted on the top of the board and emerges through the lid. All the sensors are connected through headers since I’ll eventually be using sockets to connect them in to the box.&lt;/p&gt;
+
+&lt;p&gt;I used Mayhew Lab’s webGerber service to generate a render of the board with no soldermask or silkscreen.&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-1/board-top-copper_CROPPED1.png&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-1/board-top-copper_CROPPED1-700x473.png&quot; alt=&quot;Board Render Top&quot; title=&quot;A render of the top copper layer on the pcb&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p class=&quot;with-image&quot;&gt;&lt;a href=&quot;http://localhost:4000/images/sous-vide-1/board-bottom-copper_CROPPED.png&quot;&gt;&lt;img src=&quot;http://localhost:4000/images/sous-vide-1/board-bottom-copper_CROPPED-700x472.png&quot; alt=&quot;Board Render Bottom&quot; title=&quot;A render of the bottom copper layer on the PCB&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;All the files for the design are available on my &lt;a href=&quot;http://github.com/bitdivision/sous-vide&quot;&gt;github&lt;/a&gt;, feel free to share / modify / use them as you like.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/projects/2013/06/18/sous-vide-part-2.html&quot; title=&quot;Sous-Vide Controller Part 2 – Building and Testing&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 14 Jun 2013 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/projects/2013/06/14/sous-vide-part-1.html</link>
+        <guid isPermaLink="true">http://localhost:4000/projects/2013/06/14/sous-vide-part-1.html</guid>
+        
+        <category>sous-vide</category>
+        
+        <category>electronics</category>
+        
+        
+        <category>Projects</category>
+        
+      </item>
+    
+  </channel>
+</rss>

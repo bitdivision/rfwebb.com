@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Blog - Electronics and Code</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css " />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Repairing a Roland Digital Piano</h1>
+            <section class="post-meta">
+                
+                    on Electronics
+                
+                <time class="post-date" datetime="2015-02-01">01 Feb 2015</time>
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://localhost:4000">
+                
+                    <span class="blog-title">Blog</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2015-02-01">01 Feb 2015</time>
+            
+                on Electronics
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Repairing a Roland Digital Piano</h1> -->
+
+        <section class="post-content">
+            <p>I’ve wanted a digital piano for some time now, and I still occasionally glance
+over the ‘spares and repairs’ category on eBay in hopes of a cheap deal.
+Finally, I found one:</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/keyboard.jpg"><img src="http://localhost:4000/images/keyboard/keyboard.jpg" alt="picture of the keyboard" /></a></p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>According to the previous owner, when she bought the piano, it was working
+fine. Over time it developed a crackle and eventually stopped producing any
+audio output whatsoever. It does however turn on and the digital stuff appears
+fine, the screen and buttons were all working.</p>
+
+<p>Opening up the keyboard, I found a problem pretty quickly. Leaky capacitors:</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/leaky.JPG"><img src="http://localhost:4000/images/keyboard/leaky.JPG" alt="leaky capacitors" /></a></p>
+
+<h2 id="capacitors">Capacitors</h2>
+<p>Electrolytic capacitors are composed of a thin sheet of (usually) aluminium bathed in
+electrolyte. At the factory a dielectric oxide layer is formed on the aluminium
+by applying a voltage to it and thus creating a capacitor.</p>
+
+<p>Over time the electrolyte in these capacitors dries out, usually causing the
+capacitance to decrease and the impedance to increase. In some cases, gas build
+up inside the capacitor and then bursts, leaking electrolyte onto the PCB,
+   which is what has happened here.</p>
+
+<p>The electrolyte is corrosive and as you can see from the photos below, can be
+quite damaging to the copper traces around it. Nearly all of the capacitors on
+the main board have leaked and corroded the copper around them, so they all had
+to be replaced.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/corrosion.JPG"><img src="http://localhost:4000/images/keyboard/corrosion.JPG" alt="Corroded copper" /></a></p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/corrosion_close.JPG"><img src="http://localhost:4000/images/keyboard/corrosion_close.JPG" alt="More corrosion" /></a></p>
+
+<p>The worst offenders were to be found in the audio output stage of the board,
+    directly after the DACs and before the connector for the amplifier. There
+    are two 5V regulators here with electrolytics around them, so I’d imagine
+    the heat from the regulators accelerated the leaking process and caused the
+    worst corrosion.</p>
+
+<h2 id="the-repair">The repair</h2>
+
+<p>I started off removing the faulty capacitors with a soldering iron resulting in
+a few lifted pads, and soon switched to a hot air station. The electrolyte
+seems to ‘stick’ the caps to the board so this wasn’t as easy as I had hoped
+but in the end, I got them all off.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/caps_removed.JPG"><img src="http://localhost:4000/images/keyboard/caps_removed.JPG" alt="Capacitors desoldered" /></a></p>
+
+<p>Reading around on electronics forums seems to show that deionised water is
+the best option for cleaning off the old electrolyte so I brushed the board
+down with water and alcohol. After removing the solder I ended up with a slightly
+cleaner board.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/cleaned.JPG"><img src="http://localhost:4000/images/keyboard/cleaned.JPG" alt="Cleaned board" /></a></p>
+
+<p>Unfortunately, the electrolyte had actually corroded away a number of traces
+and vias completely, which is almost certainly what caused the original
+problem. I fixed these traces with mod wires and solder and replaced the lifted
+pads with solder braid where necessary. I had to remove the -5V regulator to
+clean up the corrosion beneath it and in the process snapped off a leg. So that
+has now been replaced with a TO-220 package.</p>
+
+<p>In some places the electrolyte had migrated along the tracks underneath the
+soldermask. In these cases I tried to scrape off as much soldermask as possible
+and clean the copper underneath to prevent further corrosion.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/repairing_traces.JPG"><img src="http://localhost:4000/images/keyboard/repairing_traces.JPG" alt="Cleaned with tracesCleaned with traces and pads fixed and pads fixed" /></a></p>
+
+<p>I ended up replacing the caps with a variety of caps, mainly because it’s much
+easier to solder them in (especially where broken traces and mods occurred) and
+there weren’t any particular space requirements.</p>
+
+<p class="with-image"><a href="http://localhost:4000/images/keyboard/finished.JPG"><img src="http://localhost:4000/images/keyboard/finished.JPG" alt="new capacitors" /></a></p>
+
+<h2 id="it-works">It Works!</h2>
+
+<p>Turning everything on, the keyboard works fairly well, there is still a slight
+tone over the notes being played, this is barely noticeable unless the treble
+is turned up but I will try to diagnose it eventually.</p>
+
+<p>I have been thinking about designing a USB midi board to interface with the
+keyboard matrix, allowing me to replace all the aging electronics with a single
+board linux computer, but this is probably some time off.</p>
+
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">Richard Fortescue-Webb's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Richard Fortescue-Webb </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        Software Developer in Bristol, UK.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Repairing a Roland Digital Piano&amp;url=https://rfwebb.com/electronics/2015/02/01/digital-piano-repair.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://rfwebb.com/electronics/2015/02/01/digital-piano-repair.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://rfwebb.com/electronics/2015/02/01/digital-piano-repair.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="">Blog</a> &copy; 
+              2021 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using 
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-45205367-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>
